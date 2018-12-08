@@ -24,7 +24,8 @@ def createChatBot():
     chatbot.train("chatterbot.corpus.english")
     return chatbot
 
-async def hello(websocket, path):
+
+async def chat(websocket, path):
     global chatbot
     try:
         name = await websocket.recv()
@@ -45,7 +46,7 @@ async def hello(websocket, path):
         exit(1)
 
 
-start_server = websockets.serve(hello, 'localhost', 5678)
+start_server = websockets.serve(chat, 'localhost', 5678)
 chatbot= createChatBot()
 webbrowser.open("chatbot.html")
 asyncio.get_event_loop().run_until_complete(start_server)
