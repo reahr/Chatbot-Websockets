@@ -41,7 +41,7 @@
         <div class="col-sm-12">
             <div class="text-center">
                 <div class="input">
-                    <input id="message_input" placeholder="What's your name?"></input>
+                    <input id="message_input" placeholder="what's your name?"></input>
                 </div>
             </div>
         </div>
@@ -56,6 +56,7 @@
     <script>
         var chat_window = document.getElementById("chat");
         var message_input = document.getElementById("message_input");
+        //create new websocket, bind to server on this localhost port
         var ws = new WebSocket("ws://127.0.0.1:5678");
         // Add new message
         ws.onmessage = function (message) {
@@ -65,20 +66,21 @@
         // send message on enter
         message_input.onkeyup = function (event) {
             if (event.keyCode == 13) {
-                if (message_input.placeholder == "What's your name?") {
-                    message_input.placeholder = "Ask me something!";
+                if (message_input.placeholder == "what's your name?") {
+                    message_input.placeholder = "ask or tell me something...";
                 }
                 ws.send(message_input.value);
                 //reset
                 message_input.value = "";
             }
-        }
+        };
 
+        //close websocket after hitting click
         var quit = document.getElementById("quit");
         quit.onclick = function () {
             if (ws.readyState === WebSocket.OPEN) {
                 if (document.getElementsByClassName("chat-message").length === 0) {
-                    chat_window.innerHTML += ('<p class="col chat-message">Barnard was not given the chance :(</p>');
+                    chat_window.innerHTML += ('<p class="col chat-message"><b>Barnard:</b>I was not given a chance :(</p>');
                 } else {
                     chat_window.innerHTML += ('<p class="col chat-message"><b>Barnard:</b> Nice chatting with you!</p>');
                     chat_window.scrollTop = chat_window.scrollHeight;
