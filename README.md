@@ -1,5 +1,7 @@
 # Chatbot-Networks
 
+A simple implementation of a chatbot using Chatterbot and Websockets. Can be further optimized.
+
 Dependencies:
 ````python
 pip install chatterbot
